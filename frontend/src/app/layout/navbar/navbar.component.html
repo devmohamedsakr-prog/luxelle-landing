@@ -1,0 +1,209 @@
+<nav
+  class="fixed top-0 left-0 right-0 z-50 transition-all duration-500"
+  [class.glass-card]="isScrolled()"
+  [class.shadow-glass]="isScrolled()"
+  [class.bg-transparent]="!isScrolled()"
+>
+  <div class="section-container flex items-center justify-between h-[72px]">
+
+    <!-- Logo -->
+    <div class="flex items-center gap-3">
+      <div class="w-9 h-9 rounded-xl bg-gradient-to-br from-rose-gold to-warm-gold flex items-center justify-center shadow-luxelle-glow">
+        <span class="text-luxelle-dark font-bold text-base leading-none">L</span>
+      </div>
+      <span class="text-xl font-bold text-gradient tracking-tight">Luxelle</span>
+    </div>
+
+    <!-- Desktop nav links -->
+    <div class="hidden md:flex items-center gap-1">
+      <a
+        *ngFor="let link of navigationLinks"
+        [href]="link.href"
+        class="relative px-4 py-2 rounded-xl text-sm font-medium text-luxelle-secondary
+               hover:text-luxelle hover:bg-white/[0.05]
+               transition-all duration-200 group"
+      >
+        {{ link.label }}
+        <span class="absolute bottom-1.5 left-1/2 -translate-x-1/2 w-0 h-0.5 rounded-full
+                     bg-gradient-to-r from-rose-gold to-warm-gold
+                     group-hover:w-4 transition-all duration-300"></span>
+      </a>
+    </div>
+
+    <!-- Right actions -->
+    <div class="flex items-center gap-2">
+
+      <!-- Theme toggle -->
+      <button
+        (click)="toggleTheme()"
+        class="w-9 h-9 rounded-xl flex items-center justify-center
+               text-luxelle-tertiary hover:text-rose-gold
+               hover:bg-rose-gold/10 transition-all duration-200"
+        [attr.aria-label]="isDark() ? 'Switch to light mode' : 'Switch to dark mode'"
+      >
+        <lucide-icon name="sun"  *ngIf="isDark()"  class="w-4 h-4 text-warm-gold"></lucide-icon>
+        <lucide-icon name="moon" *ngIf="!isDark()" class="w-4 h-4 text-rose-gold"></lucide-icon>
+      </button>
+
+      <!-- Cart button -->
+      <button
+        (click)="cartService.open()"
+        class="relative w-9 h-9 rounded-xl flex items-center justify-center
+               text-luxelle-tertiary hover:text-rose-gold hover:bg-rose-gold/10
+               transition-all duration-200"
+        aria-label="Open cart"
+      >
+        <lucide-icon name="shopping-bag" class="w-4 h-4"></lucide-icon>
+        <span
+          *ngIf="cartService.totalItems() > 0"
+          class="absolute -top-1 -right-1 min-w-[18px] h-[18px] px-1
+                 rounded-full bg-rose-gold text-[9px] font-bold
+                 flex items-center justify-center text-white
+                 animate-scale-in"
+        >{{ cartService.totalItems() }}</span>
+      </button>
+
+      <!-- Auth: avatar/user button -->
+      <div class="relative" data-user-menu>
+
+        <!-- Logged-in avatar -->
+        <button *ngIf="authService.isLoggedIn()"
+          (click)="toggleUserMenu($event)"
+          class="w-9 h-9 rounded-xl bg-gradient-to-br from-rose-gold/80 to-warm-gold/80
+                 flex items-center justify-center text-white text-xs font-bold
+                 hover:from-rose-gold hover:to-warm-gold
+                 transition-all duration-200 shadow-sm ring-2 ring-transparent
+                 hover:ring-rose-gold/30"
+          aria-label="Account menu"
+        >
+          {{ authService.userInitials() }}
+        </button>
+
+        <!-- Guest login icon -->
+        <button *ngIf="!authService.isLoggedIn()"
+          (click)="openLogin()"
+          class="w-9 h-9 rounded-xl flex items-center justify-center
+                 text-luxelle-tertiary hover:text-rose-gold hover:bg-rose-gold/10
+                 transition-all duration-200 border border-luxelle-subtle hover:border-rose-gold/30"
+          aria-label="Sign in"
+        >
+          <lucide-icon name="user" class="w-4 h-4"></lucide-icon>
+        </button>
+
+        <!-- User dropdown menu -->
+        <div *ngIf="showUserMenu() && authService.isLoggedIn()"
+          class="absolute right-0 top-full mt-2 w-56 rounded-2xl border border-luxelle-medium
+                 shadow-[0_16px_48px_-8px_rgba(0,0,0,0.5)] overflow-hidden z-50
+                 animate-fade-in-down"
+          style="background: var(--bg-secondary);">
+
+          <!-- User info -->
+          <div class="px-4 py-3 border-b border-luxelle-subtle">
+            <div class="flex items-center gap-3">
+              <div class="w-9 h-9 rounded-xl bg-gradient-to-br from-rose-gold to-warm-gold flex items-center justify-center text-white text-xs font-bold flex-shrink-0">
+                {{ authService.userInitials() }}
+              </div>
+              <div class="min-w-0">
+                <p class="text-sm font-semibold text-luxelle truncate">{{ authService.currentUser()?.fullName }}</p>
+                <p class="text-xs text-luxelle-tertiary truncate">{{ authService.currentUser()?.email }}</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Actions -->
+          <div class="p-1.5">
+            <button (click)="scrollToBooking(); showUserMenu.set(false)"
+              class="w-full flex items-center gap-2.5 px-3 py-2.5 rounded-xl text-sm text-luxelle-secondary
+                     hover:text-luxelle hover:bg-white/[0.05] transition-all duration-150 text-left">
+              <lucide-icon name="calendar" class="w-4 h-4 text-rose-gold"></lucide-icon>
+              Book Appointment
+            </button>
+            <div class="my-1 border-t border-luxelle-subtle"></div>
+            <button (click)="logout()"
+              class="w-full flex items-center gap-2.5 px-3 py-2.5 rounded-xl text-sm text-red-400
+                     hover:text-red-300 hover:bg-red-500/10 transition-all duration-150 text-left">
+              <lucide-icon name="log-out" class="w-4 h-4"></lucide-icon>
+              Sign Out
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Book button (desktop, guest only) -->
+      <app-button
+        *ngIf="!authService.isLoggedIn()"
+        variant="primary"
+        size="sm"
+        class="hidden sm:flex"
+        (onClick)="scrollToBooking()"
+      >
+        Book Now
+      </app-button>
+
+      <!-- Mobile menu toggle -->
+      <button
+        (click)="toggleMobileMenu()"
+        class="md:hidden w-9 h-9 rounded-xl flex items-center justify-center
+               hover:bg-rose-gold/10 text-luxelle-secondary transition-all"
+        [attr.aria-label]="isMobileMenuOpen() ? 'Close menu' : 'Open menu'"
+      >
+        <lucide-icon name="menu" *ngIf="!isMobileMenuOpen()" class="w-5 h-5"></lucide-icon>
+        <lucide-icon name="x"    *ngIf="isMobileMenuOpen()"  class="w-5 h-5"></lucide-icon>
+      </button>
+    </div>
+  </div>
+
+  <!-- Mobile menu -->
+  <div
+    *ngIf="isMobileMenuOpen()"
+    class="md:hidden border-t border-luxelle-subtle bg-luxelle-card/95 backdrop-blur-xl animate-fade-in-down"
+  >
+    <div class="section-container py-5 flex flex-col gap-1">
+      <a
+        *ngFor="let link of navigationLinks"
+        [href]="link.href"
+        class="px-4 py-3 rounded-xl text-luxelle-secondary hover:text-luxelle
+               hover:bg-white/[0.05] transition-all duration-200 font-medium text-sm"
+        (click)="isMobileMenuOpen.set(false)"
+      >
+        {{ link.label }}
+      </a>
+      <div class="pt-3 border-t border-luxelle-subtle mt-2 flex flex-col gap-2">
+        <ng-container *ngIf="!authService.isLoggedIn()">
+          <button (click)="openLogin(); isMobileMenuOpen.set(false)"
+            class="w-full px-4 py-3 rounded-xl text-luxelle-secondary hover:text-luxelle
+                   hover:bg-white/[0.05] transition-all duration-200 font-medium text-sm text-left flex items-center gap-2">
+            <lucide-icon name="user" class="w-4 h-4 text-rose-gold"></lucide-icon>
+            Sign In
+          </button>
+          <app-button variant="primary" size="md" class="w-full" (onClick)="scrollToBooking()">
+            Book Appointment
+          </app-button>
+        </ng-container>
+        <ng-container *ngIf="authService.isLoggedIn()">
+          <div class="flex items-center gap-3 px-4 py-2">
+            <div class="w-9 h-9 rounded-xl bg-gradient-to-br from-rose-gold to-warm-gold flex items-center justify-center text-white text-xs font-bold flex-shrink-0">
+              {{ authService.userInitials() }}
+            </div>
+            <div class="min-w-0">
+              <p class="text-sm font-semibold text-luxelle truncate">{{ authService.currentUser()?.fullName }}</p>
+              <p class="text-xs text-luxelle-tertiary truncate">{{ authService.currentUser()?.email }}</p>
+            </div>
+          </div>
+          <app-button variant="primary" size="md" class="w-full" (onClick)="scrollToBooking()">
+            Book Appointment
+          </app-button>
+          <button (click)="logout(); isMobileMenuOpen.set(false)"
+            class="w-full px-4 py-3 rounded-xl text-red-400 hover:text-red-300
+                   hover:bg-red-500/10 transition-all duration-200 font-medium text-sm text-left flex items-center gap-2">
+            <lucide-icon name="log-out" class="w-4 h-4"></lucide-icon>
+            Sign Out
+          </button>
+        </ng-container>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<!-- Auth Modal (rendered in navbar, portal-style) -->
+<app-auth-modal></app-auth-modal>

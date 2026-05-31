@@ -1,0 +1,229 @@
+<section id="about" class="section-padding relative overflow-hidden">
+  <div class="absolute inset-0 bg-luxelle -z-10"></div>
+  <div class="orb orb-gold absolute w-80 h-80 bottom-0 left-0 opacity-30 -z-10"></div>
+
+  <div class="section-container">
+
+    <!-- Header -->
+    <div class="section-header" appScrollReveal>
+      <span class="section-eyebrow">Our Story</span>
+      <h2 class="mb-4">About <span class="text-gradient">Luxelle</span></h2>
+      <div class="accent-divider"></div>
+    </div>
+
+    <!-- Content grid -->
+    <div class="grid lg:grid-cols-2 gap-16 items-center">
+
+      <!-- Left: Visual -->
+      <div appScrollReveal="slideInLeft" class="relative">
+        <div class="relative rounded-3xl overflow-hidden aspect-[4/5] bg-gradient-to-br from-rose-gold/10 to-warm-gold/5 border border-luxelle-subtle flex items-end">
+          <img
+            src="/assets/images/about/about-main.png"
+            alt="Luxelle luxury beauty treatment room"
+            class="absolute inset-0 w-full h-full object-cover"
+            loading="lazy"
+          />
+          <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-black/10"></div>
+          <div class="relative w-full p-6 bg-gradient-to-t from-black/50 to-transparent backdrop-blur-sm">
+            <div class="grid grid-cols-3 gap-4 text-center">
+              <div>
+                <div class="stat-number text-2xl">500+</div>
+                <div class="text-[10px] text-luxelle-tertiary uppercase tracking-wider">Clients</div>
+              </div>
+              <div class="border-x border-white/10">
+                <div class="stat-number text-2xl">98%</div>
+                <div class="text-[10px] text-luxelle-tertiary uppercase tracking-wider">Satisfied</div>
+              </div>
+              <div>
+                <div class="stat-number text-2xl">8yr</div>
+                <div class="text-[10px] text-luxelle-tertiary uppercase tracking-wider">Experience</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Floating accent card -->
+        <div class="absolute -bottom-6 -right-6 luxelle-card !p-4 !rounded-2xl shadow-luxelle-card w-44 hidden sm:block animate-fade-in delay-400">
+          <div class="flex items-center gap-3">
+            <div class="icon-box !w-9 !h-9 flex-shrink-0">
+              <lucide-icon name="award" class="w-4 h-4 text-warm-gold"></lucide-icon>
+            </div>
+            <div>
+              <p class="text-[11px] font-bold text-luxelle leading-none">Certified</p>
+              <p class="text-[10px] text-luxelle-tertiary mt-0.5">Expert Team</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right: Text -->
+      <div appScrollReveal="slideInRight" class="space-y-7">
+        <p class="text-luxelle-secondary leading-relaxed text-base md:text-lg">
+          Luxelle is a premier beauty and wellness destination dedicated to providing exceptional
+          treatments in an atmosphere of pure elegance and sophistication. We believe that true
+          beauty comes from feeling genuinely pampered and cared for.
+        </p>
+        <p class="text-luxelle-secondary leading-relaxed text-base md:text-lg">
+          Our team of expert professionals is committed to delivering personalized services that
+          exceed your expectations. Every treatment is designed to rejuvenate your mind, body, and spirit.
+        </p>
+
+        <!-- Highlights -->
+        <div class="space-y-4 pt-2">
+          <div *ngFor="let item of [
+            { icon: 'sparkles', title: 'Premium Quality',      desc: 'Only the finest products and techniques' },
+            { icon: 'heart',    title: 'Personalized Care',    desc: 'Tailored treatments for your unique needs' },
+            { icon: 'award',    title: 'Expert Professionals', desc: 'Certified and experienced beauty specialists' }
+          ]"
+          class="flex items-start gap-4 p-4 rounded-2xl border border-luxelle-subtle
+                 hover:border-luxelle-medium hover:bg-white/[0.02] transition-all duration-300 group"
+          appScrollReveal="fadeInUp">
+            <div class="icon-box flex-shrink-0">
+              <lucide-icon [name]="item.icon" class="w-5 h-5 text-rose-gold"></lucide-icon>
+            </div>
+            <div>
+              <h3 class="text-sm font-semibold text-luxelle mb-0.5">{{ item.title }}</h3>
+              <p class="text-luxelle-tertiary text-sm">{{ item.desc }}</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- CTAs -->
+        <div class="flex flex-wrap items-center gap-4 pt-1">
+          <app-button variant="primary" size="md" (onClick)="openStory()">
+            <lucide-icon name="book-open" class="w-4 h-4 mr-1.5 -ml-0.5"></lucide-icon>
+            Learn Our Story
+          </app-button>
+          <a
+            href="#booking"
+            class="flex items-center gap-1.5 text-sm font-semibold text-luxelle-tertiary
+                   hover:text-rose-gold transition-colors duration-200 group"
+          >
+            Book a Visit
+            <lucide-icon name="arrow-right" class="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform"></lucide-icon>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ Story Modal ══════════════════════════════════════════════ -->
+<div
+  *ngIf="showStory()"
+  class="fixed inset-0 z-[300] flex items-center justify-center p-4"
+  (click)="closeStory()"
+  role="dialog"
+  aria-modal="true"
+>
+  <div class="absolute inset-0 bg-black/80 backdrop-blur-sm"></div>
+
+  <div
+    class="relative w-full max-w-2xl max-h-[90vh] flex flex-col
+           bg-[#0e0e10] border border-white/[0.1] rounded-2xl shadow-2xl overflow-hidden"
+    (click)="$event.stopPropagation()"
+  >
+    <!-- Header -->
+    <div class="flex items-center justify-between px-6 py-5 border-b border-white/[0.07] flex-shrink-0">
+      <div class="flex items-center gap-3">
+        <div class="w-9 h-9 rounded-xl bg-rose-gold/15 border border-rose-gold/20 flex items-center justify-center">
+          <lucide-icon name="book-open" class="w-4 h-4 text-rose-gold"></lucide-icon>
+        </div>
+        <div>
+          <h2 class="text-base font-bold text-luxelle leading-none">The Luxelle Story</h2>
+          <p class="text-[11px] text-luxelle-tertiary mt-0.5">Beauty, passion &amp; a decade of excellence</p>
+        </div>
+      </div>
+      <button
+        (click)="closeStory()"
+        class="w-8 h-8 rounded-xl flex items-center justify-center text-luxelle-tertiary
+               hover:text-luxelle hover:bg-white/[0.07] transition-all duration-200"
+        aria-label="Close story"
+      >
+        <lucide-icon name="x" class="w-4 h-4"></lucide-icon>
+      </button>
+    </div>
+
+    <!-- Scrollable body -->
+    <div class="flex-1 overflow-y-auto px-6 py-6 space-y-8">
+
+      <!-- Intro -->
+      <p class="text-luxelle-secondary leading-relaxed text-sm md:text-base">
+        Luxelle was born from a simple belief — that everyone deserves to feel extraordinary.
+        Founded in 2016 by sisters <span class="text-rose-gold font-semibold">Elena and Sophia Varela</span>,
+        our salon began as a single treatment room with handpicked organic products, premium tools,
+        and an unwavering commitment to genuine, personalized care.
+      </p>
+
+      <!-- Timeline -->
+      <div>
+        <h3 class="text-[10px] font-bold text-luxelle-tertiary uppercase tracking-widest mb-5">Our Journey</h3>
+        <div class="relative">
+          <div class="absolute left-[17px] top-2 bottom-2 w-px bg-gradient-to-b from-rose-gold/40 via-rose-gold/20 to-transparent"></div>
+          <div class="space-y-6">
+            <div *ngFor="let item of timeline" class="flex gap-4">
+              <div class="w-9 flex-shrink-0 pt-0.5">
+                <div class="w-[14px] h-[14px] rounded-full bg-rose-gold/30 border-2 border-rose-gold/60 ml-[5px]"></div>
+              </div>
+              <div>
+                <div class="flex items-center gap-2 mb-1">
+                  <span class="text-[10px] font-bold text-rose-gold tracking-widest">{{ item.year }}</span>
+                  <span class="text-sm font-semibold text-luxelle">{{ item.title }}</span>
+                </div>
+                <p class="text-luxelle-tertiary text-[13px] leading-relaxed">{{ item.desc }}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Values -->
+      <div>
+        <h3 class="text-[10px] font-bold text-luxelle-tertiary uppercase tracking-widest mb-5">What We Stand For</h3>
+        <div class="space-y-3">
+          <div *ngFor="let v of values"
+               class="flex items-start gap-3 p-4 rounded-xl border border-white/[0.06]
+                      bg-white/[0.02] hover:border-rose-gold/20 transition-all duration-200">
+            <div class="w-9 h-9 rounded-xl bg-rose-gold/10 border border-rose-gold/15
+                        flex items-center justify-center flex-shrink-0">
+              <lucide-icon [name]="v.icon" class="w-4 h-4 text-rose-gold"></lucide-icon>
+            </div>
+            <div>
+              <p class="text-sm font-semibold text-luxelle mb-0.5">{{ v.title }}</p>
+              <p class="text-luxelle-tertiary text-[13px] leading-relaxed">{{ v.desc }}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Quote -->
+      <div class="p-5 rounded-2xl bg-gradient-to-br from-rose-gold/[0.08] to-warm-gold/[0.04] border border-rose-gold/20">
+        <p class="text-luxelle-secondary text-sm leading-relaxed italic">
+          "We don't just offer treatments — we create moments of genuine transformation.
+          Every client who walks through our doors leaves feeling seen, restored, and beautiful."
+        </p>
+        <p class="text-rose-gold font-semibold text-xs mt-3">— Elena &amp; Sophia Varela, Co-Founders</p>
+      </div>
+
+    </div>
+
+    <!-- Footer CTA -->
+    <div class="px-6 py-4 border-t border-white/[0.07] flex items-center justify-between flex-shrink-0 bg-white/[0.01]">
+      <button
+        (click)="closeStory()"
+        class="text-xs text-luxelle-tertiary hover:text-luxelle transition-colors"
+      >
+        Close
+      </button>
+      <a
+        href="#booking"
+        (click)="closeStory()"
+        class="flex items-center gap-1.5 px-5 py-2.5 rounded-xl text-xs font-semibold
+               bg-rose-gold text-white hover:bg-rose-gold/90 transition-all duration-200 shadow-luxelle-glow"
+      >
+        Book Your First Visit
+        <lucide-icon name="arrow-right" class="w-3.5 h-3.5"></lucide-icon>
+      </a>
+    </div>
+  </div>
+</div>

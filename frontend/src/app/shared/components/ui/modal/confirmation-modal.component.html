@@ -1,0 +1,81 @@
+<ng-container *ngIf="svc.isOpen()">
+  <!-- Backdrop -->
+  <div
+    @backdrop
+    class="fixed inset-0 z-[300] bg-black/75 backdrop-blur-sm flex items-center justify-center p-4"
+    (click)="svc.resolve(false)"
+  >
+    <!-- Panel -->
+    <div
+      @panel
+      class="relative w-full max-w-sm rounded-3xl border border-luxelle-medium
+             shadow-[0_24px_80px_-12px_rgba(0,0,0,0.65)] overflow-hidden"
+      style="background: var(--bg-secondary);"
+      (click)="$event.stopPropagation()"
+    >
+      <!-- Top gradient line -->
+      <div class="absolute top-0 left-0 right-0 h-px"
+           [class]="svc.config()?.variant === 'danger'  ? 'bg-gradient-to-r from-transparent via-red-400/60 to-transparent'
+                  : svc.config()?.variant === 'warning' ? 'bg-gradient-to-r from-transparent via-amber-400/60 to-transparent'
+                  : 'bg-gradient-to-r from-transparent via-rose-gold/60 to-transparent'"></div>
+
+      <div class="px-6 pt-7 pb-6 space-y-5">
+
+        <!-- Icon circle -->
+        <div class="flex justify-center">
+          <div class="w-14 h-14 rounded-2xl flex items-center justify-center"
+               [ngClass]="{
+                 'bg-red-500/10 border border-red-500/20': svc.config()?.variant === 'danger',
+                 'bg-amber-400/10 border border-amber-400/20': svc.config()?.variant === 'warning',
+                 'bg-rose-gold/10 border border-rose-gold/20': svc.config()?.variant === 'info' || !svc.config()?.variant
+               }">
+            <lucide-icon
+              [name]="svc.config()?.variant === 'danger' ? 'trash-2'
+                    : svc.config()?.variant === 'warning' ? 'alert-triangle'
+                    : 'info'"
+              class="w-6 h-6"
+              [ngClass]="{
+                'text-red-400':   svc.config()?.variant === 'danger',
+                'text-amber-400': svc.config()?.variant === 'warning',
+                'text-rose-gold': svc.config()?.variant === 'info' || !svc.config()?.variant
+              }"
+            ></lucide-icon>
+          </div>
+        </div>
+
+        <!-- Title + message -->
+        <div class="text-center space-y-2">
+          <h3 class="text-lg font-bold text-luxelle">{{ svc.config()?.title }}</h3>
+          <p class="text-luxelle-tertiary text-sm leading-relaxed">{{ svc.config()?.message }}</p>
+        </div>
+
+        <!-- Actions -->
+        <div class="flex gap-3 pt-1">
+          <button
+            type="button"
+            (click)="svc.resolve(false)"
+            class="flex-1 px-4 py-3 rounded-2xl text-sm font-semibold
+                   border border-luxelle-medium text-luxelle-secondary
+                   hover:bg-white/[0.04] hover:text-luxelle
+                   transition-all duration-200"
+          >
+            {{ svc.config()?.cancelText || 'Cancel' }}
+          </button>
+
+          <button
+            type="button"
+            (click)="svc.resolve(true)"
+            class="flex-1 px-4 py-3 rounded-2xl text-sm font-bold transition-all duration-200"
+            [ngClass]="{
+              'bg-red-500 hover:bg-red-400 text-white shadow-[0_4px_16px_rgba(239,68,68,0.35)]':  svc.config()?.variant === 'danger',
+              'bg-amber-400 hover:bg-amber-300 text-black shadow-[0_4px_16px_rgba(251,191,36,0.3)]': svc.config()?.variant === 'warning',
+              'bg-gradient-to-br from-rose-gold to-[#e09caa] text-luxelle-dark shadow-luxelle-glow': svc.config()?.variant === 'info' || !svc.config()?.variant
+            }"
+          >
+            {{ svc.config()?.confirmText || 'Confirm' }}
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-container>

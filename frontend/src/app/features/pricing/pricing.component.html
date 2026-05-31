@@ -1,0 +1,125 @@
+<section id="pricing" class="section-padding relative overflow-hidden">
+  <div class="absolute inset-0 bg-luxelle-card/20 -z-10"></div>
+  <div class="orb orb-rose absolute w-96 h-96 top-0 left-0 opacity-20 -z-10"></div>
+  <div class="orb orb-gold absolute w-80 h-80 bottom-0 right-0 opacity-15 -z-10"></div>
+
+  <div class="section-container">
+
+    <!-- Header -->
+    <div class="section-header" appScrollReveal>
+      <span class="section-eyebrow">Transparent Pricing</span>
+      <h2 class="mb-4">Flexible <span class="text-gradient">Pricing Plans</span></h2>
+      <div class="accent-divider"></div>
+      <p class="text-luxelle-tertiary mt-5 max-w-lg mx-auto text-base leading-relaxed">
+        Choose the perfect plan for your beauty and wellness journey. No hidden fees, ever.
+      </p>
+    </div>
+
+    <!-- ── Skeleton grid ── -->
+    <div *ngIf="isLoading()" class="grid sm:grid-cols-2 lg:grid-cols-4 gap-5 items-stretch">
+      <div *ngFor="let s of skeletons; trackBy: trackByIndex" class="luxelle-card flex flex-col animate-pulse">
+        <div class="w-12 h-12 rounded-2xl bg-white/[0.05] mb-5 flex-shrink-0"></div>
+        <div class="h-5 w-1/2 rounded-lg bg-white/[0.05] mb-2"></div>
+        <div class="h-3 w-3/4 rounded bg-white/[0.04] mb-5"></div>
+        <div class="h-9 w-2/3 rounded-xl bg-white/[0.05] mb-6 pb-6 border-b border-white/[0.05]"></div>
+        <div class="space-y-3 flex-1 mb-6">
+          <div *ngFor="let f of [1,2,3,4]; trackBy: trackByIndex" class="flex items-center gap-2.5">
+            <div class="w-4 h-4 rounded-full bg-white/[0.05] flex-shrink-0"></div>
+            <div class="h-3 rounded bg-white/[0.04]" [style.width]="(55 + f * 8) + '%'"></div>
+          </div>
+        </div>
+        <div class="h-10 w-full rounded-xl bg-white/[0.05]"></div>
+      </div>
+    </div>
+
+    <!-- ── Error state ── -->
+    <div *ngIf="!isLoading() && hasError()"
+         class="flex flex-col items-center gap-4 py-16 text-center">
+      <lucide-icon name="alert-circle" class="w-10 h-10 text-rose-gold/60"></lucide-icon>
+      <p class="text-luxelle-tertiary text-sm">{{ hasError() }}</p>
+    </div>
+
+    <!-- ── Real cards grid ── -->
+    <div *ngIf="!isLoading() && !hasError()" class="grid sm:grid-cols-2 lg:grid-cols-4 gap-5 items-stretch">
+      <div
+        *ngFor="let tier of pricingTiers(); let i = index; trackBy: trackById"
+        appScrollReveal [animationType]="'fadeInUp'"
+        [style.animation-delay]="(i * 100) + 'ms'"
+        class="relative flex flex-col rounded-2xl p-6 h-full transition-all duration-300"
+        [ngClass]="tier.isPopular
+          ? 'luxelle-card luxelle-card-featured ring-1 ring-rose-gold/30 shadow-luxelle-card-hover z-10'
+          : 'luxelle-card hover:shadow-luxelle-card'"
+      >
+        <!-- Popular badge -->
+        <div *ngIf="tier.isPopular" class="absolute -top-3.5 left-0 right-0 flex justify-center">
+          <span class="badge-popular">
+            <lucide-icon name="star" class="w-2.5 h-2.5"></lucide-icon>
+            Most Popular
+          </span>
+        </div>
+
+        <!-- Tier icon -->
+        <div class="mb-4" [class.mt-2]="tier.isPopular">
+          <div class="w-12 h-12 rounded-2xl flex items-center justify-center flex-shrink-0"
+               [ngClass]="tier.isPopular
+                 ? 'bg-rose-gold/15 border border-rose-gold/25'
+                 : 'bg-warm-gold/10 border border-warm-gold/20'">
+            <ng-container [ngSwitch]="tier.icon">
+              <lucide-icon name="star"     *ngSwitchCase="'star'"     class="w-5 h-5" [ngClass]="tier.isPopular ? 'text-rose-gold' : 'text-warm-gold'"></lucide-icon>
+              <lucide-icon name="crown"    *ngSwitchCase="'crown'"    class="w-5 h-5" [ngClass]="tier.isPopular ? 'text-rose-gold' : 'text-warm-gold'"></lucide-icon>
+              <lucide-icon name="gem"      *ngSwitchCase="'gem'"      class="w-5 h-5" [ngClass]="tier.isPopular ? 'text-rose-gold' : 'text-warm-gold'"></lucide-icon>
+              <lucide-icon name="sparkles" *ngSwitchDefault           class="w-5 h-5" [ngClass]="tier.isPopular ? 'text-rose-gold' : 'text-warm-gold'"></lucide-icon>
+            </ng-container>
+          </div>
+        </div>
+
+        <!-- Name & description -->
+        <div class="mb-5">
+          <h3 class="text-lg font-bold text-luxelle mb-1">{{ tier.name }}</h3>
+          <p class="text-luxelle-tertiary text-xs leading-relaxed">{{ tier.description }}</p>
+        </div>
+
+        <!-- Price -->
+        <div class="mb-6 pb-6 border-b border-luxelle-subtle">
+          <div class="flex items-end gap-1">
+            <span class="text-4xl font-extrabold tracking-tight"
+                  [ngClass]="tier.isPopular ? 'text-gradient' : 'text-luxelle'">
+              ${{ tier.price }}
+            </span>
+            <span class="text-luxelle-tertiary text-sm pb-1">/month</span>
+          </div>
+        </div>
+
+        <!-- Features -->
+        <ul class="space-y-3 flex-1 mb-6">
+          <li *ngFor="let feature of tier.features; trackBy: trackByFeature" class="flex items-start gap-2.5 text-sm">
+            <div class="w-4 h-4 rounded-full flex-shrink-0 mt-0.5 flex items-center justify-center"
+                 [ngClass]="tier.isPopular ? 'bg-rose-gold/20' : 'bg-warm-gold/15'">
+              <lucide-icon name="check" class="w-2.5 h-2.5"
+                           [ngClass]="tier.isPopular ? 'text-rose-gold' : 'text-warm-gold'"></lucide-icon>
+            </div>
+            <span class="text-luxelle-secondary leading-snug">{{ feature }}</span>
+          </li>
+        </ul>
+
+        <!-- CTA -->
+        <app-button
+          [variant]="tier.isPopular ? 'primary' : 'outline'"
+          size="md"
+          [fullWidth]="true"
+          class="mt-auto"
+          (onClick)="scrollToBooking()"
+        >
+          Get Started
+        </app-button>
+      </div>
+    </div>
+
+    <!-- Footer note -->
+    <p *ngIf="!isLoading() && !hasError()"
+       class="text-center text-luxelle-tertiary text-sm mt-10">
+      All plans include a free initial consultation. Cancel anytime.
+    </p>
+
+  </div>
+</section>

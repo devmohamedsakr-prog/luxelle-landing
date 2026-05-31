@@ -1,0 +1,39 @@
+<ng-container *ngIf="isOpen()">
+  <!-- Backdrop -->
+  <div
+    @backdrop
+    class="fixed inset-0 z-[200] bg-black/70 backdrop-blur-sm flex items-center justify-center p-4"
+    (click)="onBackdropClick()"
+  >
+    <!-- Panel -->
+    <div
+      @panel
+      [class]="'relative w-full rounded-3xl border border-luxelle-medium shadow-[0_24px_80px_-12px_rgba(0,0,0,0.6)] overflow-hidden ' + sizeClass()"
+      style="background: var(--bg-secondary);"
+      (click)="$event.stopPropagation()"
+    >
+      <!-- Top gradient accent -->
+      <div class="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-rose-gold/50 to-transparent"></div>
+
+      <!-- Header -->
+      <div class="flex items-center justify-between px-6 pt-6 pb-4 border-b border-luxelle-subtle" *ngIf="title()">
+        <h3 class="text-lg font-bold text-luxelle tracking-tight">{{ title() }}</h3>
+        <button
+          *ngIf="closeable()"
+          (click)="closed.emit()"
+          class="w-8 h-8 rounded-xl flex items-center justify-center
+                 text-luxelle-tertiary hover:text-luxelle hover:bg-white/[0.05]
+                 transition-all"
+          type="button"
+        >
+          <lucide-icon name="x" class="w-4 h-4"></lucide-icon>
+        </button>
+      </div>
+
+      <!-- Content slot -->
+      <div class="px-6 py-5">
+        <ng-content></ng-content>
+      </div>
+    </div>
+  </div>
+</ng-container>

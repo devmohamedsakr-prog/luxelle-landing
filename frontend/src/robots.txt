@@ -1,0 +1,12 @@
+User-agent: *
+Allow: /
+
+# Sitemaps
+Sitemap: https://luxelle.com/sitemap.xml
+
+# Disallow admin or private paths (none currently, but listed for future-proofing)
+Disallow: /api/
+Disallow: /*.json$
+
+# Crawl-delay for polite crawling
+Crawl-delay: 1

@@ -1,0 +1,22 @@
+core:
+  - changed-files:
+    - any-glob-to-any-file: "src/app/core/**/*"
+
+features:
+  - changed-files:
+    - any-glob-to-any-file: "src/app/features/**/*"
+
+styles:
+  - changed-files:
+    - any-glob-to-any-file: "src/styles/**/*"
+    - any-glob-to-any-file: "tailwind.config.ts"
+    - any-glob-to-any-file: "postcss.config.js"
+
+ci-cd:
+  - changed-files:
+    - any-glob-to-any-file: ".github/**/*"
+
+dependencies:
+  - changed-files:
+    - any-glob-to-any-file: "package.json"
+    - any-glob-to-any-file: "package-lock.json"

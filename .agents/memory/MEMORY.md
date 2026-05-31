@@ -1,0 +1,1 @@
+- [Luxelle performance audit](luxelle-perf-audit.md) — all query, security, and frontend perf fixes applied; key patterns to keep consistent.

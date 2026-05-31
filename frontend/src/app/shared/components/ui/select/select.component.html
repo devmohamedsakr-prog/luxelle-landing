@@ -1,0 +1,59 @@
+<div class="relative w-full">
+
+  <!-- Trigger -->
+  <button
+    type="button"
+    (click)="toggleOpen()"
+    [disabled]="disabled()"
+    [ngClass]="[
+      'luxelle-input w-full flex items-center justify-between gap-3 text-left cursor-pointer hover:border-luxelle-medium transition-all',
+      isOpen() ? 'border-rose-gold ring-2 ring-rose-gold/20 bg-luxelle-card' : ''
+    ]"
+  >
+    <span [class]="selectedLabel() ? 'text-luxelle' : 'text-luxelle-tertiary'">
+      {{ selectedLabel() || placeholder() }}
+    </span>
+    <lucide-icon
+      name="chevron-down"
+      class="w-4 h-4 text-luxelle-tertiary flex-shrink-0 transition-transform duration-300"
+      [class.rotate-180]="isOpen()"
+    ></lucide-icon>
+  </button>
+
+  <!-- Dropdown panel -->
+  <div
+    *ngIf="isOpen()"
+    class="absolute z-50 top-full left-0 right-0 mt-2 rounded-2xl
+           border border-luxelle-medium overflow-hidden
+           shadow-[0_16px_48px_-8px_rgba(0,0,0,0.4)]
+           animate-scale-in origin-top"
+    style="background: var(--bg-secondary);"
+  >
+    <div class="py-1.5 max-h-64 overflow-y-auto">
+
+      <button
+        *ngFor="let opt of options()"
+        type="button"
+        (click)="select(opt)"
+        [ngClass]="[
+          'w-full flex items-center justify-between gap-3 px-4 py-3 text-sm text-left transition-all duration-150',
+          opt.disabled ? 'opacity-40 cursor-not-allowed' : 'hover:bg-rose-gold/8',
+          value() === opt.value ? 'text-rose-gold font-semibold bg-rose-gold/5' : 'text-luxelle-secondary'
+        ]"
+      >
+        <span>{{ opt.label }}</span>
+        <lucide-icon
+          *ngIf="value() === opt.value"
+          name="check"
+          class="w-3.5 h-3.5 text-rose-gold flex-shrink-0"
+        ></lucide-icon>
+      </button>
+
+      <div *ngIf="options().length === 0"
+           class="px-4 py-6 text-center text-luxelle-tertiary text-sm">
+        No options available
+      </div>
+
+    </div>
+  </div>
+</div>

@@ -1,0 +1,7 @@
+# These owners will be the default owners for everything in the repo.
+*       @Mostafa-SAID7
+
+# specific owners for specific file types or directories
+/src/app/core/        @Mostafa-SAID7
+/src/styles/          @Mostafa-SAID7
+/.github/workflows/   @Mostafa-SAID7

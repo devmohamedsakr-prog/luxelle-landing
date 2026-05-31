@@ -1,0 +1,43 @@
+<div
+  *ngIf="visible()"
+  @fadeOut
+  class="fixed inset-0 z-[9999] flex flex-col items-center justify-center bg-luxelle overflow-hidden"
+>
+  <!-- Background orbs -->
+  <div class="absolute inset-0 pointer-events-none overflow-hidden">
+    <div class="orb orb-rose absolute w-[600px] h-[600px] -top-48 -left-48 opacity-50"></div>
+    <div class="orb orb-gold  absolute w-[500px] h-[500px] -bottom-32 -right-32 opacity-40" style="animation-delay:-4s"></div>
+  </div>
+
+  <!-- Logo mark -->
+  <div class="relative z-10 flex flex-col items-center gap-8">
+
+    <!-- Animated logo -->
+    <div class="relative">
+      <!-- Spinning ring -->
+      <div class="absolute inset-0 w-24 h-24 rounded-full border-2 border-transparent"
+           style="border-top-color: var(--accent-primary); border-right-color: rgba(232,180,188,0.2); animation: spinSlow 1.4s linear infinite;"></div>
+      <div class="absolute inset-0 w-24 h-24 rounded-full border-2 border-transparent"
+           style="border-bottom-color: var(--accent-secondary); border-left-color: rgba(212,175,55,0.2); animation: spinSlow 2s linear infinite reverse;"></div>
+
+      <!-- Center badge -->
+      <div class="w-24 h-24 rounded-full bg-gradient-to-br from-rose-gold/20 to-warm-gold/10
+                  border border-rose-gold/20 flex items-center justify-center glow-rose">
+        <span class="text-3xl font-bold text-gradient">L</span>
+      </div>
+    </div>
+
+    <!-- Brand name -->
+    <div class="text-center space-y-2">
+      <h1 class="text-2xl font-bold text-gradient tracking-tight">Luxelle</h1>
+      <p class="text-luxelle-tertiary text-xs uppercase tracking-[0.25em] font-medium">Beauty &amp; Wellness</p>
+    </div>
+
+    <!-- Progress dots -->
+    <div class="flex gap-2 items-center">
+      <span class="w-1.5 h-1.5 rounded-full bg-rose-gold animate-pulse"></span>
+      <span class="w-1.5 h-1.5 rounded-full bg-rose-gold animate-pulse" style="animation-delay:0.2s"></span>
+      <span class="w-1.5 h-1.5 rounded-full bg-rose-gold animate-pulse" style="animation-delay:0.4s"></span>
+    </div>
+  </div>
+</div>

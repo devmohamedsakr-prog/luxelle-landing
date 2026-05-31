@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <defs>
+    <linearGradient id="luxGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#D4AF37;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#F4E4C1;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#C9A961;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Background circle with luxury gold gradient -->
+  <circle cx="50" cy="50" r="48" fill="url(#luxGrad)"/>
+  
+  <!-- Inner shadow circle for depth -->
+  <circle cx="50" cy="50" r="48" fill="none" stroke="#B8960F" stroke-width="2" opacity="0.3"/>
+  
+  <!-- L Letter -->
+  <text x="50" y="72" font-family="Georgia, serif" font-size="52" font-weight="bold" fill="#2C1810" text-anchor="middle">L</text>
+</svg>

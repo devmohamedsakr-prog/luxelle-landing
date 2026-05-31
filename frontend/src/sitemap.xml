@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
+
+  <!-- Homepage / Hero -->
+  <url>
+    <loc>https://luxelle.com/</loc>
+    <lastmod>2024-01-01</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+    <image:image>
+      <image:loc>https://luxelle.com/assets/images/hero/hero-bg.png</image:loc>
+      <image:title>Luxelle Premium Beauty &amp; Wellness Center — Elegant Spa Interior</image:title>
+      <image:caption>Luxurious spa interior with warm rose-gold ambient lighting</image:caption>
+    </image:image>
+  </url>
+
+  <!-- About -->
+  <url>
+    <loc>https://luxelle.com/#about</loc>
+    <lastmod>2024-01-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://luxelle.com/assets/images/about/about-main.png</image:loc>
+      <image:title>Luxelle Beauty Treatment Room — Premium Spa Ambiance</image:title>
+      <image:caption>Elegant luxury beauty treatment room with warm candlelight and rose petals</image:caption>
+    </image:image>
+  </url>
+
+  <!-- Services -->
+  <url>
+    <loc>https://luxelle.com/#services</loc>
+    <lastmod>2024-01-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <!-- Pricing -->
+  <url>
+    <loc>https://luxelle.com/#pricing</loc>
+    <lastmod>2024-01-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <!-- Gallery -->
+  <url>
+    <loc>https://luxelle.com/#gallery</loc>
+    <lastmod>2024-01-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <image:image>
+      <image:loc>https://luxelle.com/assets/images/gallery/gallery-skincare.png</image:loc>
+      <image:title>Luxury Skincare Facial Treatment at Luxelle</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://luxelle.com/assets/images/gallery/gallery-spa.png</image:loc>
+      <image:title>Relaxing Spa Treatment at Luxelle Wellness Center</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://luxelle.com/assets/images/gallery/gallery-makeup.png</image:loc>
+      <image:title>Professional Makeup Artistry at Luxelle Beauty Salon</image:title>
+    </image:image>
+  </url>
+
+  <!-- Booking -->
+  <url>
+    <loc>https://luxelle.com/#booking</loc>
+    <lastmod>2024-01-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+</urlset>

@@ -1,0 +1,62 @@
+uploads = []
+outputs = []
+
+[[generated]]
+id = "kyWQlC1Wj5VdXjnJyPQsE"
+uri = "file://frontend/src/assets/images/hero/hero-bg.png"
+type = "image"
+title = "generated_image"
+
+[[generated]]
+id = "WBN_xmErFGvDbyr0eFO2h"
+uri = "file://frontend/src/assets/images/about/about-main.png"
+type = "image"
+title = "generated_image"
+
+[[generated]]
+id = "tmFdrfou-BkE0sr1SFQ7_"
+uri = "file://frontend/src/assets/images/gallery/gallery-skincare.png"
+type = "image"
+title = "generated_image"
+
+[[generated]]
+id = "wOeUZXtvW25dwkEdt3XYB"
+uri = "file://frontend/src/assets/images/gallery/gallery-hair.png"
+type = "image"
+title = "generated_image"
+
+[[generated]]
+id = "mTriMqSlHQ3d0McjMkrcB"
+uri = "file://frontend/src/assets/images/gallery/gallery-makeup.png"
+type = "image"
+title = "generated_image"
+
+[[generated]]
+id = "2EtRycxVy1LkLd_YxG-Xl"
+uri = "file://frontend/src/assets/images/gallery/gallery-spa.png"
+type = "image"
+title = "generated_image"
+
+[[generated]]
+id = "wHCNw7oA_Eg0fOgSjqKuS"
+uri = "file://frontend/src/assets/images/gallery/gallery-lashes.png"
+type = "image"
+title = "generated_image"
+
+[[generated]]
+id = "xL9_2v6dnTlFjcjmfegGO"
+uri = "file://frontend/src/assets/images/gallery/gallery-nails.png"
+type = "image"
+title = "generated_image"
+
+[[generated]]
+id = "CLQGt44a7F9hYveNLGZuA"
+uri = "file://frontend/src/assets/images/gallery/gallery-facial.png"
+type = "image"
+title = "generated_image"
+
+[[generated]]
+id = "XUP59xR2CvOKLtsENlDnZ"
+uri = "file://frontend/src/assets/images/gallery/gallery-wellness.png"
+type = "image"
+title = "generated_image"
